@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+import { ClientWalletButton } from "@/components/ClientWalletButton";
 import { NETWORK } from "@/lib/constants";
 import styles from "./Navbar.module.css";
 
@@ -71,7 +71,7 @@ export function Navbar() {
 
         {/* Wallet Button */}
         <div className={styles.walletWrapper}>
-          <WalletMultiButton />
+          <ClientWalletButton />
         </div>
       </div>
     </nav>

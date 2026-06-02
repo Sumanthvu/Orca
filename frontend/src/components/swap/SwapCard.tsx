@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+import { ClientWalletButton } from "@/components/ClientWalletButton";
 import { TokenSelector } from "./TokenSelector";
 import { usePool } from "@/hooks/usePool";
 import { useSwap } from "@/hooks/useSwap";
@@ -277,7 +277,7 @@ export function SwapCard() {
 
       {/* Action Button */}
       {!connected ? (
-        <WalletMultiButton style={{ width: "100%" }} />
+        <ClientWalletButton style={{ width: "100%" }} />
       ) : (
         <button
           id="swap-execute-btn"

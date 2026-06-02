@@ -199,7 +199,7 @@ export function usePools(): {
     try {
       // Get all accounts owned by our program with size matching Pool::LEN
       const accounts = await connection.getProgramAccounts(PROGRAM_ID, {
-        filters: [{ dataSize: 200 }], // Pool::LEN = 196 + some buffer
+        filters: [{ dataSize: 228 }], // 8 (disc) + 6*32 (pubkeys) + 3*8 (u64s) + 4 (u8s) = 228
       });
 
       const poolPromises = accounts.map(async ({ pubkey, account }) => {

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+import { ClientWalletButton } from "@/components/ClientWalletButton";
 import { usePools } from "@/hooks/usePool";
 import { PoolCard } from "@/components/pools/PoolCard";
 import { AddLiquidityModal } from "@/components/pools/AddLiquidityModal";
@@ -32,7 +32,7 @@ export default function PoolsPage() {
             </p>
           </div>
           {!connected && (
-            <WalletMultiButton />
+            <ClientWalletButton />
           )}
         </div>
 

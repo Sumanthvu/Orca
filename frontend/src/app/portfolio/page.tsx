@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+import { ClientWalletButton } from "@/components/ClientWalletButton";
 import { usePools } from "@/hooks/usePool";
 import { formatTokenAmount, formatUSD } from "@/lib/amm-math";
 import { DEVNET_TOKENS, getSolscanUrl } from "@/lib/constants";
@@ -60,7 +60,7 @@ export default function PortfolioPage() {
             <p className={styles.connectDesc}>
               Connect your Solana wallet to view your liquidity positions and track your earnings.
             </p>
-            <WalletMultiButton />
+            <ClientWalletButton />
           </div>
         ) : (
           <>
