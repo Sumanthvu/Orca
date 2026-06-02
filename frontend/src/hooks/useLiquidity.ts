@@ -48,13 +48,24 @@ export function useLiquidity(): UseLiquidityReturn {
 
   const sendAndConfirm = useCallback(
     async (tx: Transaction): Promise<string> => {
-      const { blockhash } = await connection.getLatestBlockhash();
-      tx.recentBlockhash = blockhash;
-      tx.feePayer = publicKey!;
-      const sig = await sendTransaction(tx, connection);
-      setStatus("confirming");
-      await connection.confirmTransaction(sig, "confirmed");
-      return sig;
+      try {
+        console.log("Fetching blockhash...");
+        const { blockhash } = await connection.getLatestBlockhash("confirmed");
+        tx.recentBlockhash = blockhash;
+        tx.feePayer = publicKey!;
+        
+        console.log("Requesting signature from Phantom...");
+        const sig = await sendTransaction(tx, connection);
+        
+        console.log("Signature received. Confirming transaction...");
+        setStatus("confirming");
+        await connection.confirmTransaction(sig, "confirmed");
+        console.log("Transaction confirmed!");
+        return sig;
+      } catch (err) {
+        console.error("Transaction failed inside sendAndConfirm:", err);
+        throw err;
+      }
     },
     [connection, publicKey, sendTransaction]
   );
@@ -128,6 +139,7 @@ export function useLiquidity(): UseLiquidityReturn {
         setStatus("success");
         return sig;
       } catch (err: unknown) {
+        console.error("Add liquidity error:", err);
         const message = err instanceof Error ? err.message : "Add liquidity failed";
         setError(message);
         setStatus("error");
@@ -208,6 +220,7 @@ export function useLiquidity(): UseLiquidityReturn {
         setStatus("success");
         return sig;
       } catch (err: unknown) {
+        console.error("Remove liquidity error:", err);
         const message = err instanceof Error ? err.message : "Remove liquidity failed";
         setError(message);
         setStatus("error");
