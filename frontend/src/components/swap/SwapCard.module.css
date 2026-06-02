@@ -1,0 +1,225 @@
+.card {
+  padding: 1.75rem;
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.25rem;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.settingsActive {
+  color: var(--color-primary);
+  background: var(--color-primary-glow);
+}
+
+/* Slippage panel */
+.slippagePanel {
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.slippageLabel {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.slippageOptions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.slippageCustom {
+  max-width: 90px;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.875rem;
+  border-radius: 8px;
+  height: 34px;
+}
+
+/* Token boxes */
+.tokenBox {
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  transition: border-color 0.2s;
+}
+
+.tokenBox:focus-within {
+  border-color: var(--color-primary);
+}
+
+.tokenBoxHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.balance {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.tokenInputRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.amountInput {
+  flex: 1;
+  border: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  -moz-appearance: textfield;
+}
+
+.amountInput::-webkit-outer-spin-button,
+.amountInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.outputAmount {
+  flex: 1;
+  font-size: 2rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  min-height: 2.5rem;
+}
+
+.skeleton {
+  display: block;
+  width: 120px;
+  height: 2rem;
+}
+
+.zeroOutput {
+  color: var(--color-text-muted);
+}
+
+/* Flip button */
+.flipWrapper {
+  display: flex;
+  justify-content: center;
+  margin: -0.25rem 0;
+  z-index: 1;
+  position: relative;
+}
+
+.flipBtn {
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+}
+
+.flipBtn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  background: rgba(0, 212, 255, 0.05);
+  transform: rotate(180deg);
+}
+
+/* Details */
+.details {
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 0.875rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.detailRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8125rem;
+}
+
+.detailLabel {
+  color: var(--color-text-muted);
+}
+
+.detailValue {
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+/* Pool warning */
+.poolWarning {
+  width: 100%;
+  justify-content: center;
+  padding: 0.625rem 1rem;
+}
+
+/* Error */
+.errorMsg {
+  width: 100%;
+  justify-content: center;
+  padding: 0.625rem 1rem;
+  font-size: 0.8125rem;
+}
+
+/* Success banner */
+.successBanner {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  color: var(--color-success);
+}
+
+.txLink {
+  margin-left: auto;
+  color: var(--color-primary);
+  text-decoration: none;
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.txLink:hover {
+  text-decoration: underline;
+}
+
+/* Swap button */
+.swapBtn {
+  width: 100%;
+  margin-top: 0.25rem;
+}
