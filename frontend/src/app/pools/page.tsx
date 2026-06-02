@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { useWallet } from "@solana/wallet-adapter-react";
+import { useWallet, useConnection } from "@solana/wallet-adapter-react";
+import { getAssociatedTokenAddress } from "@solana/spl-token";
 import { ClientWalletButton } from "@/components/ClientWalletButton";
+import { useEffect } from "react";
 import { usePools } from "@/hooks/usePool";
 import { PoolCard } from "@/components/pools/PoolCard";
 import { AddLiquidityModal } from "@/components/pools/AddLiquidityModal";
@@ -11,8 +13,29 @@ import { PoolData } from "@/hooks/usePool";
 import styles from "./page.module.css";
 
 export default function PoolsPage() {
-  const { connected } = useWallet();
+  const { publicKey, connected } = useWallet();
+  const { connection } = useConnection();
   const { pools, loading, refetch } = usePools();
+
+  const [lpBalances, setLpBalances] = useState<Record<string, bigint>>({});
+
+  useEffect(() => {
+    if (!connected || !publicKey || pools.length === 0) return;
+    const fetchBalances = async () => {
+      const balances: Record<string, bigint> = {};
+      for (const pool of pools) {
+        try {
+          const lpAta = await getAssociatedTokenAddress(pool.lpMint, publicKey);
+          const info = await connection.getTokenAccountBalance(lpAta);
+          balances[pool.address.toString()] = BigInt(info.value.amount);
+        } catch {
+          balances[pool.address.toString()] = 0n;
+        }
+      }
+      setLpBalances(balances);
+    };
+    fetchBalances();
+  }, [connected, publicKey, pools, connection]);
 
   const [addModalPool, setAddModalPool] = useState<PoolData | null>(null);
   const [removeModalPool, setRemoveModalPool] = useState<PoolData | null>(null);
@@ -79,6 +102,7 @@ export default function PoolsPage() {
               <PoolCard
                 key={pool.address.toString()}
                 pool={pool}
+                userLpBalance={lpBalances[pool.address.toString()] || 0n}
                 onAddLiquidity={setAddModalPool}
                 onRemoveLiquidity={setRemoveModalPool}
               />
@@ -99,7 +123,7 @@ export default function PoolsPage() {
       {removeModalPool && (
         <RemoveLiquidityModal
           pool={removeModalPool}
-          userLpBalance={0n}
+          userLpBalance={lpBalances[removeModalPool.address.toString()] || 0n}
           onClose={() => setRemoveModalPool(null)}
           onSuccess={refetch}
         />
