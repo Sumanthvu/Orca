@@ -21,28 +21,20 @@ export const VAULT_A_SEED = Buffer.from("vault_a");
 export const VAULT_B_SEED = Buffer.from("vault_b");
 export const LP_MINT_SEED = Buffer.from("lp_mint");
 
-// Well-known devnet token mints for the UI demo
 export const DEVNET_TOKENS = [
   {
-    symbol: "USDC",
-    name: "USD Coin",
-    mint: "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU",
+    symbol: "TKNA",
+    name: "Orca Token A",
+    mint: "Gjwa9WEJ3Gjj7N5sLdcmaZKBtvDYYzuDmDVG2Pbk31ma",
     decimals: 6,
     logoURI: "https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v/logo.png",
   },
   {
-    symbol: "SOL",
-    name: "Wrapped SOL",
-    mint: "So11111111111111111111111111111111111111112",
-    decimals: 9,
+    symbol: "TKNB",
+    name: "Orca Token B",
+    mint: "7MVV166ThiexXq39B6V5CYPLwN1HQfonmVd1TaDPdeVX",
+    decimals: 6,
     logoURI: "https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/So11111111111111111111111111111111111111112/logo.png",
-  },
-  {
-    symbol: "BONK",
-    name: "Bonk",
-    mint: "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263",
-    decimals: 5,
-    logoURI: "https://arweave.net/hQiPZOsRZXGXBJd_82PhVdlM_hACsT_q89Kp3aoM5Fk",
   },
 ];
 
