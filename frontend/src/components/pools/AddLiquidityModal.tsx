@@ -40,13 +40,16 @@ export function AddLiquidityModal({
   const tokenB = getToken(pool.tokenBMint.toString());
 
   const [amountAStr, setAmountAStr] = useState("");
+  const [amountBStr, setAmountBStr] = useState("");
   const [slippagePct] = useState(0.5);
 
-  // Auto-calculate Token B based on pool ratio
   const amountA = parseTokenAmount(amountAStr, tokenA.decimals);
 
+  // If pool is empty, use manual input for Token B. Otherwise, auto-calculate.
   const amountB =
-    pool.reserveA > 0n && amountA > 0n
+    pool.lpSupply === 0n
+      ? parseTokenAmount(amountBStr, tokenB.decimals)
+      : pool.reserveA > 0n && amountA > 0n
       ? (amountA * pool.reserveB) / pool.reserveA
       : 0n;
 
@@ -114,15 +117,29 @@ export function AddLiquidityModal({
         {/* Plus separator */}
         <div className={styles.plusSign}>+</div>
 
-        {/* Token B (auto-calculated) */}
+        {/* Token B Input / Auto-calculated */}
         <div className={styles.inputGroup}>
-          <label className={styles.inputLabel}>{tokenB.symbol} Amount (calculated)</label>
+          <label className={styles.inputLabel}>
+            {tokenB.symbol} Amount {pool.lpSupply > 0n && "(calculated)"}
+          </label>
           <div className={styles.inputRow}>
-            <div className={styles.calculatedAmount}>
-              {amountB > 0n
-                ? formatTokenAmount(amountB, tokenB.decimals)
-                : "0.00"}
-            </div>
+            {pool.lpSupply === 0n ? (
+              <input
+                id="add-liquidity-amount-b"
+                className={`input ${styles.amountInput}`}
+                type="number"
+                min="0"
+                placeholder="0.00"
+                value={amountBStr}
+                onChange={(e) => setAmountBStr(e.target.value)}
+              />
+            ) : (
+              <div className={styles.calculatedAmount}>
+                {amountB > 0n
+                  ? formatTokenAmount(amountB, tokenB.decimals)
+                  : "0.00"}
+              </div>
+            )}
             <span className={styles.tokenTag}>{tokenB.symbol}</span>
           </div>
         </div>
