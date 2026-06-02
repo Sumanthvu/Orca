@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useWallet } from "@solana/wallet-adapter-react";
+import { useWallet, useConnection } from "@solana/wallet-adapter-react";
+import { getAssociatedTokenAddress } from "@solana/spl-token";
 import { ClientWalletButton } from "@/components/ClientWalletButton";
 import { usePools } from "@/hooks/usePool";
 import { formatTokenAmount, formatUSD } from "@/lib/amm-math";
@@ -22,8 +23,35 @@ export default function PortfolioPage() {
   const { publicKey, connected } = useWallet();
   const { pools, loading } = usePools();
 
-  // In a full implementation, we'd fetch user's LP token balances here
-  // For now show the structure with placeholder data
+  const { connection } = useConnection();
+  const [lpBalances, setLpBalances] = useState<Record<string, bigint>>({});
+
+  useEffect(() => {
+    if (!connected || !publicKey || pools.length === 0) return;
+
+    const fetchBalances = async () => {
+      const balances: Record<string, bigint> = {};
+      for (const pool of pools) {
+        try {
+          const lpAta = await getAssociatedTokenAddress(pool.lpMint, publicKey);
+          const info = await connection.getTokenAccountBalance(lpAta);
+          balances[pool.address.toString()] = BigInt(info.value.amount);
+        } catch (err) {
+          balances[pool.address.toString()] = 0n;
+        }
+      }
+      setLpBalances(balances);
+    };
+
+    fetchBalances();
+  }, [connected, publicKey, pools, connection]);
+
+  let activePoolsCount = 0;
+  pools.forEach((pool) => {
+    if ((lpBalances[pool.address.toString()] || 0n) > 0n) {
+      activePoolsCount++;
+    }
+  });
 
   return (
     <div className={styles.page}>
@@ -73,7 +101,7 @@ export default function PortfolioPage() {
               </div>
               <div className={`glass-card ${styles.overviewCard}`}>
                 <span className="stat-label">Active Pools</span>
-                <span className="stat-value">0</span>
+                <span className="stat-value">{activePoolsCount}</span>
                 <span className={styles.overviewSub}>Pools with LP tokens</span>
               </div>
               <div className={`glass-card ${styles.overviewCard}`}>
@@ -133,8 +161,7 @@ export default function PortfolioPage() {
                   {pools.map((pool) => {
                     const tokenA = getToken(pool.tokenAMint.toString());
                     const tokenB = getToken(pool.tokenBMint.toString());
-                    // Placeholder LP balance — in production, fetch from chain
-                    const lpBalance = 0n;
+                    const lpBalance = lpBalances[pool.address.toString()] || 0n;
                     const shareA = pool.lpSupply > 0n ? (lpBalance * pool.reserveA) / pool.lpSupply : 0n;
                     const shareB = pool.lpSupply > 0n ? (lpBalance * pool.reserveB) / pool.lpSupply : 0n;
 
