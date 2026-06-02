@@ -101,10 +101,10 @@ export function useLiquidity(): UseLiquidityReturn {
         const discriminator = Buffer.from([181, 157, 89, 67, 143, 182, 52, 72]);
         const data = Buffer.alloc(discriminator.length + 8 * 4);
         discriminator.copy(data, 0);
-        new BN(amountADesired.toString()).toBuffer("le", 8).copy(data, 8);
-        new BN(amountBDesired.toString()).toBuffer("le", 8).copy(data, 16);
-        new BN(amountAMin.toString()).toBuffer("le", 8).copy(data, 24);
-        new BN(amountBMin.toString()).toBuffer("le", 8).copy(data, 32);
+        Buffer.from(new BN(amountADesired.toString()).toArray("le", 8)).copy(data, 8);
+        Buffer.from(new BN(amountBDesired.toString()).toArray("le", 8)).copy(data, 16);
+        Buffer.from(new BN(amountAMin.toString()).toArray("le", 8)).copy(data, 24);
+        Buffer.from(new BN(amountBMin.toString()).toArray("le", 8)).copy(data, 32);
 
         const keys = [
           { pubkey: publicKey, isSigner: true, isWritable: true },
@@ -180,9 +180,9 @@ export function useLiquidity(): UseLiquidityReturn {
         const discriminator = Buffer.from([80, 85, 209, 72, 24, 206, 177, 108]);
         const data = Buffer.alloc(discriminator.length + 8 * 3);
         discriminator.copy(data, 0);
-        new BN(lpAmount.toString()).toBuffer("le", 8).copy(data, 8);
-        new BN(minA.toString()).toBuffer("le", 8).copy(data, 16);
-        new BN(minB.toString()).toBuffer("le", 8).copy(data, 24);
+        Buffer.from(new BN(lpAmount.toString()).toArray("le", 8)).copy(data, 8);
+        Buffer.from(new BN(minA.toString()).toArray("le", 8)).copy(data, 16);
+        Buffer.from(new BN(minB.toString()).toArray("le", 8)).copy(data, 24);
 
         const keys = [
           { pubkey: publicKey, isSigner: true, isWritable: true },

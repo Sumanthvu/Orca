@@ -108,8 +108,8 @@ export function useSwap(): UseSwapReturn {
         discriminator.copy(data, 0);
         const amountInBN = new BN(amountIn.toString());
         const minOutBN = new BN(minimumOut.toString());
-        amountInBN.toBuffer("le", 8).copy(data, 8);
-        minOutBN.toBuffer("le", 8).copy(data, 16);
+        Buffer.from(amountInBN.toArray("le", 8)).copy(data, 8);
+        Buffer.from(minOutBN.toArray("le", 8)).copy(data, 16);
         data.writeUInt8(aToB ? 1 : 0, 24);
 
         const keys = [
