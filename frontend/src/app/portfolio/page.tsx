@@ -47,9 +47,21 @@ export default function PortfolioPage() {
   }, [connected, publicKey, pools, connection]);
 
   let activePoolsCount = 0;
+  let totalPositionValue = 0;
+
   pools.forEach((pool) => {
-    if ((lpBalances[pool.address.toString()] || 0n) > 0n) {
+    const lpBalance = lpBalances[pool.address.toString()] || 0n;
+    if (lpBalance > 0n) {
       activePoolsCount++;
+      const tokenA = getToken(pool.tokenAMint.toString());
+      const tokenB = getToken(pool.tokenBMint.toString());
+      
+      const shareA = pool.lpSupply > 0n ? (lpBalance * pool.reserveA) / pool.lpSupply : 0n;
+      const shareB = pool.lpSupply > 0n ? (lpBalance * pool.reserveB) / pool.lpSupply : 0n;
+      
+      const valA = Number(shareA) / Math.pow(10, tokenA.decimals);
+      const valB = Number(shareB) / Math.pow(10, tokenB.decimals);
+      totalPositionValue += valA + valB; // Assuming 1 token = $1 for demo purposes
     }
   });
 
@@ -96,7 +108,7 @@ export default function PortfolioPage() {
             <div className={styles.overviewGrid}>
               <div className={`glass-card ${styles.overviewCard}`}>
                 <span className="stat-label">Total Position Value</span>
-                <span className="stat-value gradient-text">$0.00</span>
+                <span className="stat-value gradient-text">{formatUSD(totalPositionValue)}</span>
                 <span className={styles.overviewSub}>Across all pools</span>
               </div>
               <div className={`glass-card ${styles.overviewCard}`}>
@@ -106,8 +118,8 @@ export default function PortfolioPage() {
               </div>
               <div className={`glass-card ${styles.overviewCard}`}>
                 <span className="stat-label">Estimated Fees Earned</span>
-                <span className="stat-value gradient-text-accent">$0.00</span>
-                <span className={styles.overviewSub}>Since initial deposit</span>
+                <span className="stat-value gradient-text-accent">—</span>
+                <span className={styles.overviewSub}>Requires historical indexer</span>
               </div>
             </div>
 
