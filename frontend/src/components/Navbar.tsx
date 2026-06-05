@@ -7,9 +7,37 @@ import { NETWORK } from "@/lib/constants";
 import styles from "./Navbar.module.css";
 
 const NAV_LINKS = [
-  { href: "/swap", label: "Swap" },
-  { href: "/pools", label: "Pools" },
-  { href: "/portfolio", label: "Portfolio" },
+  {
+    href: "/swap",
+    label: "Swap",
+    icon: (
+      <svg width="15" height="15" fill="none" viewBox="0 0 15 15">
+        <path d="M3 5h9M3 5L5.5 2.5M3 5L5.5 7.5M12 10H3M12 10L9.5 7.5M12 10L9.5 12.5"
+          stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    ),
+  },
+  {
+    href: "/pools",
+    label: "Pools",
+    icon: (
+      <svg width="15" height="15" fill="none" viewBox="0 0 15 15">
+        <path d="M7.5 2C7.5 2 3 4.5 3 7.5C3 10 5 12 7.5 12C10 12 12 10 12 7.5C12 4.5 7.5 2 7.5 2Z"
+          stroke="currentColor" strokeWidth="1.5"/>
+        <circle cx="7.5" cy="7.5" r="2" stroke="currentColor" strokeWidth="1.5"/>
+      </svg>
+    ),
+  },
+  {
+    href: "/portfolio",
+    label: "Portfolio",
+    icon: (
+      <svg width="15" height="15" fill="none" viewBox="0 0 15 15">
+        <rect x="2" y="5" width="11" height="8" rx="1.5" stroke="currentColor" strokeWidth="1.5"/>
+        <path d="M5 5V4C5 3 6 2 7.5 2C9 2 10 3 10 4V5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      </svg>
+    ),
+  },
 ];
 
 export function Navbar() {
@@ -21,27 +49,25 @@ export function Navbar() {
         {/* Logo */}
         <Link href="/" className={styles.logo}>
           <div className={styles.logoIcon}>
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-              <circle cx="14" cy="14" r="13" stroke="url(#g1)" strokeWidth="2"/>
-              <path d="M8 14C8 10.686 10.686 8 14 8C17.314 8 20 10.686 20 14" stroke="url(#g2)" strokeWidth="2.5" strokeLinecap="round"/>
-              <path d="M20 14C20 17.314 17.314 20 14 20C10.686 20 8 17.314 8 14" stroke="url(#g3)" strokeWidth="2.5" strokeLinecap="round"/>
-              <circle cx="14" cy="14" r="3" fill="url(#g4)"/>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <circle cx="10" cy="10" r="9" stroke="url(#ng1)" strokeWidth="1.5"/>
+              <path d="M5.5 10C5.5 7.515 7.515 5.5 10 5.5C12.485 5.5 14.5 7.515 14.5 10"
+                stroke="url(#ng2)" strokeWidth="2" strokeLinecap="round"/>
+              <path d="M14.5 10C14.5 12.485 12.485 14.5 10 14.5C7.515 14.5 5.5 12.485 5.5 10"
+                stroke="url(#ng3)" strokeWidth="2" strokeLinecap="round"/>
+              <circle cx="10" cy="10" r="2.5" fill="url(#ng4)"/>
               <defs>
-                <linearGradient id="g1" x1="0" y1="0" x2="28" y2="28" gradientUnits="userSpaceOnUse">
-                  <stop stopColor="#00d4ff"/>
-                  <stop offset="1" stopColor="#7c3aed"/>
+                <linearGradient id="ng1" x1="0" y1="0" x2="20" y2="20" gradientUnits="userSpaceOnUse">
+                  <stop stopColor="#3b82f6"/><stop offset="1" stopColor="#06b6d4"/>
                 </linearGradient>
-                <linearGradient id="g2" x1="8" y1="8" x2="20" y2="14" gradientUnits="userSpaceOnUse">
-                  <stop stopColor="#00d4ff"/>
-                  <stop offset="1" stopColor="#06ffa5"/>
+                <linearGradient id="ng2" x1="5.5" y1="5.5" x2="14.5" y2="10" gradientUnits="userSpaceOnUse">
+                  <stop stopColor="#60a5fa"/><stop offset="1" stopColor="#22d3ee"/>
                 </linearGradient>
-                <linearGradient id="g3" x1="20" y1="14" x2="8" y2="20" gradientUnits="userSpaceOnUse">
-                  <stop stopColor="#7c3aed"/>
-                  <stop offset="1" stopColor="#00d4ff"/>
+                <linearGradient id="ng3" x1="14.5" y1="10" x2="5.5" y2="14.5" gradientUnits="userSpaceOnUse">
+                  <stop stopColor="#8b5cf6"/><stop offset="1" stopColor="#3b82f6"/>
                 </linearGradient>
-                <linearGradient id="g4" x1="11" y1="11" x2="17" y2="17" gradientUnits="userSpaceOnUse">
-                  <stop stopColor="#00d4ff"/>
-                  <stop offset="1" stopColor="#06ffa5"/>
+                <linearGradient id="ng4" x1="7.5" y1="7.5" x2="12.5" y2="12.5" gradientUnits="userSpaceOnUse">
+                  <stop stopColor="#60a5fa"/><stop offset="1" stopColor="#22d3ee"/>
                 </linearGradient>
               </defs>
             </svg>
@@ -54,7 +80,7 @@ export function Navbar() {
 
         {/* Navigation Links */}
         <div className={styles.navLinks}>
-          {NAV_LINKS.map(({ href, label }) => (
+          {NAV_LINKS.map(({ href, label, icon }) => (
             <Link
               key={href}
               href={href}
@@ -64,6 +90,7 @@ export function Navbar() {
                   : ""
               }`}
             >
+              {icon}
               {label}
             </Link>
           ))}

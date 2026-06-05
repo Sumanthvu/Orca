@@ -68,29 +68,21 @@ export function PoolCard({
 
       {/* Stats */}
       <div className={styles.stats}>
-        <div className="stat-card">
-          <span className="stat-label">TVL</span>
-          <span className="stat-value" style={{ fontSize: "1rem" }}>
-            {formatUSD(tvlEstimate)}
-          </span>
+        <div className={styles.statItem}>
+          <span className={styles.statItemLabel}>TVL</span>
+          <span className={styles.statItemValue}>{formatUSD(tvlEstimate)}</span>
         </div>
-        <div className="stat-card">
-          <span className="stat-label">Price</span>
-          <span className="stat-value" style={{ fontSize: "1rem" }}>
-            1 {tokenA.symbol} = {price.toFixed(4)} {tokenB.symbol}
-          </span>
+        <div className={styles.statItem}>
+          <span className={styles.statItemLabel}>Price</span>
+          <span className={styles.statItemValue}>1 {tokenA.symbol} = {price.toFixed(4)} {tokenB.symbol}</span>
         </div>
-        <div className="stat-card">
-          <span className="stat-label">Reserve A</span>
-          <span className="stat-value" style={{ fontSize: "1rem" }}>
-            {formatTokenAmount(pool.reserveA, tokenA.decimals)} {tokenA.symbol}
-          </span>
+        <div className={styles.statItem}>
+          <span className={styles.statItemLabel}>Reserve A</span>
+          <span className={styles.statItemValue}>{formatTokenAmount(pool.reserveA, tokenA.decimals)} {tokenA.symbol}</span>
         </div>
-        <div className="stat-card">
-          <span className="stat-label">Reserve B</span>
-          <span className="stat-value" style={{ fontSize: "1rem" }}>
-            {formatTokenAmount(pool.reserveB, tokenB.decimals)} {tokenB.symbol}
-          </span>
+        <div className={styles.statItem}>
+          <span className={styles.statItemLabel}>Reserve B</span>
+          <span className={styles.statItemValue}>{formatTokenAmount(pool.reserveB, tokenB.decimals)} {tokenB.symbol}</span>
         </div>
       </div>
 

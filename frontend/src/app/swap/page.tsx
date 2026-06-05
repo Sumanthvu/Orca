@@ -27,7 +27,15 @@ export default function SwapPage() {
         {/* Right column — Info panel */}
         <div className={styles.infoCol}>
           <div className={`glass-card ${styles.infoCard}`}>
-            <h3 className={styles.infoTitle}>How swaps work</h3>
+            <div className={styles.infoCardHeader}>
+              <div className={styles.infoCardIcon}>
+                <svg width="16" height="16" fill="none" viewBox="0 0 16 16">
+                  <path d="M3 6h10M3 6L5.5 3.5M3 6L5.5 8.5M13 10H3M13 10L10.5 7.5M13 10L10.5 12.5"
+                    stroke="#60a5fa" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+              <h3 className={styles.infoTitle}>How Swaps Work</h3>
+            </div>
             <div className={styles.infoSteps}>
               <div className={styles.infoStep}>
                 <div className={styles.infoStepDot} />
@@ -43,20 +51,26 @@ export default function SwapPage() {
               </div>
               <div className={styles.infoStep}>
                 <div className={styles.infoStepDot} />
-                <p>Approve in your wallet — transaction confirms in ~400ms.</p>
+                <p>Approve in Phantom — transaction confirms in ~400ms on Solana.</p>
               </div>
             </div>
           </div>
 
           <div className={`glass-card ${styles.infoCard}`}>
-            <h3 className={styles.infoTitle}>Formula</h3>
+            <div className={styles.infoCardHeader}>
+              <div className={styles.infoCardIcon}>
+                <svg width="16" height="16" fill="none" viewBox="0 0 16 16">
+                  <circle cx="8" cy="8" r="6" stroke="#60a5fa" strokeWidth="1.5"/>
+                  <path d="M8 5v3l2 2" stroke="#22d3ee" strokeWidth="1.5" strokeLinecap="round"/>
+                </svg>
+              </div>
+              <h3 className={styles.infoTitle}>The Formula</h3>
+            </div>
             <div className={styles.formula}>
-              <span className="gradient-text" style={{ fontSize: "1.5rem", fontWeight: 800 }}>
-                x · y = k
-              </span>
+              <div className={styles.formulaCode}>x · y = k</div>
               <p className={styles.formulaDesc}>
                 After your trade, the product of the two reserves stays constant.
-                Larger trades relative to the pool size incur more slippage.
+                Larger trades relative to pool size incur more price impact.
               </p>
             </div>
           </div>
