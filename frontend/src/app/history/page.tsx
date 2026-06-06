@@ -167,12 +167,18 @@ export default function HistoryPage() {
               </div>
             )}
 
-            {/* Loading */}
             {loading ? (
-              <div className={`glass-card`} style={{ padding: "1.5rem", display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-                {[...Array(6)].map((_, i) => (
-                  <div key={i} className={`skeleton ${styles.skeletonRow}`} />
-                ))}
+              /* Loading */
+              <div className={`glass-card`} style={{ padding: "2rem", display: "flex", flexDirection: "column", gap: "1rem", alignItems: "center", textAlign: "center" }}>
+                <span className="spinner" style={{ width: "24px", height: "24px", borderWidth: "3px" }} />
+                <div style={{ display: "flex", flexDirection: "column", gap: "0.375rem" }}>
+                  <span style={{ fontSize: "0.9375rem", fontWeight: 600, color: "var(--text-primary)" }}>
+                    Scanning blockchain…
+                  </span>
+                  <span style={{ fontSize: "0.8125rem", color: "var(--text-secondary)" }}>
+                    Fetching your Orca transactions one at a time to respect Solana RPC limits. This may take 10–20 seconds.
+                  </span>
+                </div>
               </div>
             ) : history.length === 0 ? (
               /* Empty state */
