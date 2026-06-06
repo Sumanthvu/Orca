@@ -1,8 +1,7 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
-import { PublicKey } from "@solana/web3.js";
 import { PROGRAM_ID, getSolscanUrl } from "@/lib/constants";
 
 export type TxType = "swap" | "add_liquidity" | "remove_liquidity" | "initialize_pool" | "unknown";
