@@ -10,6 +10,7 @@ const NAV_LINKS = [
   { href: "/swap",      label: "Swap"      },
   { href: "/pools",     label: "Pools"     },
   { href: "/portfolio", label: "Portfolio" },
+  { href: "/history",   label: "History"   },
 ];
 
 export function Navbar() {
