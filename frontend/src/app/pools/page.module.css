@@ -1,10 +1,108 @@
 /* ============================================================
-   POOLS PAGE — Professional v2
+   POOLS PAGE — Dark v3
    ============================================================ */
 
 .page {
   min-height: calc(100vh - var(--navbar-height));
   padding: 3rem 0 6rem;
+}
+
+.pageHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.headerLeft { display: flex; flex-direction: column; gap: 0.5rem; }
+
+.pageTitle {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+.pageSubtitle {
+  color: var(--text-secondary);
+  font-size: 0.9375rem;
+  max-width: 520px;
+  line-height: 1.65;
+}
+
+/* === Stats Row === */
+.statsRow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--border-card);
+  margin-bottom: 2.5rem;
+}
+.statCard {
+  background: var(--bg-card);
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: background 0.2s;
+}
+.statCard:hover { background: var(--bg-card-hover); }
+
+/* === Pool Grid === */
+.poolsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+  gap: 1rem;
+}
+
+.loadingGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+  gap: 1rem;
+}
+.skeletonCard { height: 300px; border-radius: var(--radius-lg); }
+
+/* === Empty State === */
+.emptyState {
+  padding: 5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+}
+.emptyIcon {
+  width: 64px;
+  height: 64px;
+  background: rgba(79, 142, 247, 0.06);
+  border: 1px solid var(--border-card);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+.emptyTitle {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+.emptyDesc {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  max-width: 380px;
+  line-height: 1.65;
+}
+
+@media (max-width: 640px) {
+  .statsRow { grid-template-columns: 1fr 1fr; }
+  .poolsGrid, .loadingGrid { grid-template-columns: 1fr; }
 }
 
 .pageHeader {
