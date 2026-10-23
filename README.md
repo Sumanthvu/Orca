@@ -17,7 +17,7 @@ Traditional exchanges use order books to match buyers and sellers. Automated Mar
 Orca uses the **Constant-Product Formula**:
 
 \[
-x \times y = k
+x * y = k
 \]
 
 Where:
