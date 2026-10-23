@@ -191,7 +191,6 @@ Security is essential when building applications that handle digital assets. Orc
 - Invalid amounts, empty pools, and insufficient balances.
 - Correct authorization for token transfers and withdrawals.
 
-The project should be independently audited before being used to manage production funds.
 
 ## Learning Outcomes
 
